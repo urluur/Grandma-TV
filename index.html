@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grandma's TV</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <style>
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-12 list-group">
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo1?a=1">SLO 1</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo2?a=1">SLO 2</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo3?a=1">SLO 3</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.kp1?a=1">Koper</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.mb1?a=1">Maribor</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://584943999.r.worldssl.net/584943999/_definst_/vzivo/playlist.m3u8">Exodus</a>
+                <a href="#" class="list-group-item list-group-item-action"
+                    data-iframe-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8">Veseljak Golica TV</a>
+            </div>
+            <div class="col-md-9 col-sm-8 col-12">
+                <div class="video-container">
+                    <iframe id="video-player" src="" frameborder="0" allowfullscreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        const programLinks = document.querySelectorAll('.list-group-item-action');
+        const videoPlayer = document.getElementById('video-player');
+
+        programLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const iframeSrc = link.dataset.iframeSrc;
+                videoPlayer.src = iframeSrc;
+                programLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
