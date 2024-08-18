@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grandma's TV</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
+
     <style>
         body {
             background-color: rgb(34, 37, 41);
@@ -16,7 +18,6 @@
             padding: 0;
             margin: 0;
             height: 100vh;
-            ;
         }
 
         .list-group-item {
@@ -46,7 +47,8 @@
             height: 100vh;
         }
 
-        #video-player {
+        #video-player,
+        #iframe-player {
             position: absolute;
             top: 0;
             left: 0;
@@ -61,8 +63,7 @@
         <div class="row">
             <div class="col-xl-1 col-sm-2 col-12 list-group bg-dark d-flex flex-column">
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo1?a=1">SLO
-                    1</a>
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo1?a=1">SLO 1</a>
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
                     data-iframe-src="https://365.rtvslo.si/embed/tv.slo2?a=1">SLO 2</a>
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
@@ -74,9 +75,9 @@
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
                     data-iframe-src="https://365.rtvslo.si/embed/tv.mmctv?a=1">MMC TV</a>
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8">Veseljak TV</a>
-                <a href=" #" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://584943999.r.worldssl.net/584943999/_definst_/vzivo/playlist.m3u8">Exodus</a>
+                    data-video-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8">Veseljak TV</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-video-src="https://584943999.r.worldssl.net/584943999/_definst_/vzivo/playlist.m3u8">Exodus</a>
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
                     data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCjYCgkpX1eQCTne99oT63yA&rel=0&autoplay=1">Nova24
                     TV</a>
@@ -86,23 +87,54 @@
             </div>
             <div class="col-xl-11 col-sm-10 col-12">
                 <div class="video-container">
-                    <iframe id="video-player" src="" frameborder="0" allowfullscreen="true"></iframe>
+                    <div id="video-player-container" style="display: none;">
+                        <video id="video-player" class="video-js vjs-default-skin" controls preload="auto"></video>
+                    </div>
+                    <iframe id="iframe-player" style="display: none;" frameborder="0" allowfullscreen="true"></iframe>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@1.13.3/dist/videojs-http-streaming.min.js"></script>
 
     <script>
         const programLinks = document.querySelectorAll('.list-group-item-action');
-        const videoPlayer = document.getElementById('video-player');
+        const videoPlayerContainer = document.getElementById('video-player-container');
+        const videoPlayer = videojs('video-player', {
+            techOrder: ['html5'],
+            html5: {
+                hls: {
+                    withCredentials: false
+                }
+            }
+        });
+        const iframePlayer = document.getElementById('iframe-player');
 
         programLinks.forEach(link => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
+                const videoSrc = link.dataset.videoSrc;
                 const iframeSrc = link.dataset.iframeSrc;
-                videoPlayer.src = iframeSrc;
+
+                if (videoSrc) {
+                    iframePlayer.style.display = 'none';
+                    iframePlayer.src = '';
+                    videoPlayerContainer.style.display = 'block';
+                    videoPlayer.src({ src: videoSrc, type: 'application/x-mpegURL' });
+                    videoPlayer.play();
+                } else if (iframeSrc) {
+
+                    videoPlayer.pause();
+                    videoPlayerContainer.style.display = 'none';
+                    videoPlayer.src('');
+                    iframePlayer.style.display = 'block';
+                    iframePlayer.src = iframeSrc;
+                }
+
                 programLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
             });
