@@ -12,19 +12,31 @@
             color: #fff;
         }
 
+        .list-group {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            ;
+        }
+
         .list-group-item {
             background-color: rgb(52, 58, 64);
             color: #fff;
+            font-size: larger;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .list-group-item-action:hover,
         .list-group-item-action:focus {
-            background-color: rgb(52, 58, 64);
+            background-color: rgb(31, 35, 38);
             color: #fff;
         }
 
         .list-group-item.active {
-            background-color: rgb(52, 58, 64);
+            background-color: rgb(21, 117, 212);
             color: #fff;
         }
 
@@ -35,7 +47,6 @@
         }
 
         #video-player {
-            background-color: rgb(34, 37, 41);
             position: absolute;
             top: 0;
             left: 0;
@@ -48,23 +59,35 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 col-sm-4 col-12 list-group bg-dark">
-                <a href="#" class="list-group-item list-group-item-action"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo1?a=1">SLO 1</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo2?a=1">SLO 2</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo3?a=1">SLO 3</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.kp1?a=1">Koper</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.mb1?a=1">Maribor</a>
-                <a href="#" class="list-group-item list-group-item-action"
+            <div class="col-xl-1 col-sm-2 col-12 list-group bg-dark d-flex flex-column">
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://cdn-live.rtvslo.si/hls/live/2099493/slo1_ott/playlist.m3u8?hdnts=exp=1723941226~acl=*~hmac=5bc889fde26ee1af58dbb3b5040fb2346c49cbd7502c6573a901ab82c587f240">SLO
+                    1</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://cdn-live.rtvslo.si/hls/live/2110535/slo2_ott/playlist.m3u8?hdnts=exp=1723941577~acl=*~hmac=24d7d146de893521c1b95c861fc7034e4710c88e64b0ad9397b2547d39661929">SLO
+                    2</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://cdn-live.rtvslo.si/hls/live/2099495/slo3_ott/playlist.m3u8?hdnts=exp=1723941768~acl=*~hmac=4d0812987f2f9b67db4d575150678e3b5e0816f8120556991e2f089f10345e56">SLO
+                    3</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://cdn-live.rtvslo.si/hls/live/2099159/tvkp/playlist.m3u8?hdnts=exp=1723941849~acl=*~hmac=a0a0b11c09c3bf66140c412a3f1b605fec993e86e7442feae5fcf867833f4fd4">Koper</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://cdn-live.rtvslo.si/hls/live/2101131/tvmb/playlist.m3u8?hdnts=exp=1723941902~acl=*~hmac=5dc72f00809409cd2d3262e977ef1dcb4a696b4b48d3916fd585adbbdeee228c">Maribor</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://cdn-live.rtvslo.si/hls/live/2098829/mmctv1/playlist.m3u8?hdnts=exp=1723941955~acl=*~hmac=765d1ae72fb7eb8531a3aab7a349f6daec017fef00d3d21c5cf4ea14b2689b2e">MMC
+                    TV</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8">Veseljak TV</a>
+                <a href=" #" class="list-group-item list-group-item-action flex-grow-1 text-center"
                     data-iframe-src="https://584943999.r.worldssl.net/584943999/_definst_/vzivo/playlist.m3u8">Exodus</a>
-                <a href="#" class="list-group-item list-group-item-action"
-                    data-iframe-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8">Veseljak Golica TV</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCjYCgkpX1eQCTne99oT63yA&rel=0&autoplay=1">Nova24
+                    TV</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
+                    data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCOGseusAY1nMkEhpmmz6Mmg&rel=0&autoplay=1">Nova24
+                    TV 2</a>
             </div>
-            <div class="col-md-9 col-sm-8 col-12">
+            <div class="col-xl-11 col-sm-10 col-12">
                 <div class="video-container">
                     <iframe id="video-player" src="" frameborder="0" allowfullscreen="true"></iframe>
                 </div>
