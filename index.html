@@ -23,7 +23,7 @@
         .list-group-item {
             background-color: rgb(52, 58, 64);
             color: #fff;
-            font-size: larger;
+            font-size: large;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -126,6 +126,7 @@
                     videoPlayerContainer.style.display = 'block';
                     videoPlayer.src({ src: videoSrc, type: 'application/x-mpegURL' });
                     videoPlayer.play();
+                    videoPlayerContainer.scrollIntoView({ behavior: 'smooth' });
                 } else if (iframeSrc) {
 
                     videoPlayer.pause();
@@ -133,6 +134,7 @@
                     videoPlayer.src('');
                     iframePlayer.style.display = 'block';
                     iframePlayer.src = iframeSrc;
+                    iframePlayer.scrollIntoView({ behavior: 'smooth' });
                 }
 
                 programLinks.forEach(l => l.classList.remove('active'));
