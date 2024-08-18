@@ -26,8 +26,7 @@
             font-size: large;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
+            position: relative;
         }
 
         .list-group-item-action:hover,
@@ -39,6 +38,20 @@
         .list-group-item.active {
             background-color: rgb(21, 117, 212);
             color: #fff;
+        }
+
+        .list-group-item span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            font-size: 5.5rem;
+            color: rgba(255, 255, 255, 0.05);
+            pointer-events: none;
         }
 
         .video-container {
@@ -62,30 +75,28 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-1 col-sm-2 col-12 list-group bg-dark d-flex flex-column">
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo1?a=1">SLO 1</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo2?a=1">SLO 2</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo3?a=1">SLO 3</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.kp1?a=1">Koper</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.mb1?a=1">Maribor</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://365.rtvslo.si/embed/tv.mmctv?a=1">MMC TV</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-video-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8">Veseljak TV</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-video-src="https://584943999.r.worldssl.net/584943999/_definst_/vzivo/playlist.m3u8">Exodus</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCjYCgkpX1eQCTne99oT63yA&rel=0&autoplay=1">Nova24
-                    TV</a>
-                <a href="#" class="list-group-item list-group-item-action flex-grow-1 text-center"
-                    data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCOGseusAY1nMkEhpmmz6Mmg&rel=0&autoplay=1">Nova24
-                    TV 2</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo1?a=1"><span>1</span>SLO1</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo2?a=1"><span>2</span>SLO2</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.slo3?a=1"><span>3</span>SLO3</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.kp1?a=1"><span>4</span>Koper</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.mb1?a=1"><span>5</span>Maribor</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://365.rtvslo.si/embed/tv.mmctv?a=1"><span>6</span>MMC</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-video-src="https://radio.serv.si/VeseljakGolicaTV/video.m3u8"><span>7</span>Veseljak</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-video-src="https://584943999.r.worldssl.net/584943999/_definst_/vzivo/playlist.m3u8"><span>8</span>Exodus</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCjYCgkpX1eQCTne99oT63yA&rel=0&autoplay=1"><span>9</span>Nova24</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCOGseusAY1nMkEhpmmz6Mmg&rel=0&autoplay=1"><span>0</span>2.Nova24</a>
             </div>
-            <div class="col-xl-11 col-sm-10 col-12">
+            <div class="col-xl-11 col-sm-10 col-12 p-0 m-0">
                 <div class="video-container">
                     <div id="video-player-container" style="display: none;">
                         <video id="video-player" class="video-js vjs-default-skin" controls preload="auto"></video>
@@ -114,32 +125,50 @@
         });
         const iframePlayer = document.getElementById('iframe-player');
 
+        function activateChannel(link) {
+            const videoSrc = link.dataset.videoSrc;
+            const iframeSrc = link.dataset.iframeSrc;
+
+            if (videoSrc) {
+                iframePlayer.style.display = 'none';
+                iframePlayer.src = '';
+                videoPlayerContainer.style.display = 'block';
+                videoPlayer.src({ src: videoSrc, type: 'application/x-mpegURL' });
+                videoPlayer.play();
+                videoPlayerContainer.scrollIntoView({ behavior: 'smooth' });
+            } else if (iframeSrc) {
+                videoPlayer.pause();
+                videoPlayerContainer.style.display = 'none';
+                videoPlayer.src('');
+                iframePlayer.style.display = 'block';
+                iframePlayer.src = iframeSrc;
+                iframePlayer.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            programLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        }
+
         programLinks.forEach(link => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
-                const videoSrc = link.dataset.videoSrc;
-                const iframeSrc = link.dataset.iframeSrc;
-
-                if (videoSrc) {
-                    iframePlayer.style.display = 'none';
-                    iframePlayer.src = '';
-                    videoPlayerContainer.style.display = 'block';
-                    videoPlayer.src({ src: videoSrc, type: 'application/x-mpegURL' });
-                    videoPlayer.play();
-                    videoPlayerContainer.scrollIntoView({ behavior: 'smooth' });
-                } else if (iframeSrc) {
-
-                    videoPlayer.pause();
-                    videoPlayerContainer.style.display = 'none';
-                    videoPlayer.src('');
-                    iframePlayer.style.display = 'block';
-                    iframePlayer.src = iframeSrc;
-                    iframePlayer.scrollIntoView({ behavior: 'smooth' });
-                }
-
-                programLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
+                activateChannel(link);
             });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            if (key >= '1' && key <= '9') {
+                const index = parseInt(key, 10) - 1;
+                if (index < programLinks.length) {
+                    activateChannel(programLinks[index]);
+                }
+            } else if (key === '0') {
+                const index = 9;
+                if (index < programLinks.length) {
+                    activateChannel(programLinks[index]);
+                }
+            }
         });
     </script>
 </body>
