@@ -7,68 +7,7 @@
     <title>Grandma's TV</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
-
-    <style>
-        body {
-            background-color: rgb(34, 37, 41);
-            color: #fff;
-        }
-
-        .list-group {
-            padding: 0;
-            margin: 0;
-            height: 100vh;
-        }
-
-        .list-group-item {
-            background-color: rgb(52, 58, 64);
-            color: #fff;
-            font-size: large;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .list-group-item-action:hover,
-        .list-group-item-action:focus {
-            background-color: rgb(31, 35, 38);
-            color: #fff;
-        }
-
-        .list-group-item.active {
-            background-color: rgb(21, 117, 212);
-            color: #fff;
-        }
-
-        .list-group-item span {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: right;
-            font-size: 5.5rem;
-            color: rgba(255, 255, 255, 0.05);
-            pointer-events: none;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-        }
-
-        #video-player,
-        #iframe-player {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -95,7 +34,13 @@
                     data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCjYCgkpX1eQCTne99oT63yA&rel=0&autoplay=1"><span>9</span>Nova24</a>
                 <a href="#" class="list-group-item list-group-item-action flex-grow-1"
                     data-iframe-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCOGseusAY1nMkEhpmmz6Mmg&rel=0&autoplay=1"><span>0</span>2.Nova24</a>
-            </div>
+                 <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-video-src="https://webtvstream.bhtelecom.ba/hrt1.m3u8">HRT1</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-video-src="https://webtvstream.bhtelecom.ba/hrt2.m3u8">HRT2</a>
+                <a href="#" class="list-group-item list-group-item-action flex-grow-1"
+                    data-video-src="https://webtvstream.bhtelecom.ba/hrt3.m3u8">HRT3</a>
+                </div>
             <div class="col-xl-11 col-sm-10 col-12 p-0 m-0">
                 <div class="video-container">
                     <div id="video-player-container" style="display: none;">
@@ -109,68 +54,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@1.13.3/dist/videojs-http-streaming.min.js"></script>
-
-    <script>
-        const programLinks = document.querySelectorAll('.list-group-item-action');
-        const videoPlayerContainer = document.getElementById('video-player-container');
-        const videoPlayer = videojs('video-player', {
-            techOrder: ['html5'],
-            html5: {
-                hls: {
-                    withCredentials: false
-                }
-            }
-        });
-        const iframePlayer = document.getElementById('iframe-player');
-
-        function activateChannel(link) {
-            const videoSrc = link.dataset.videoSrc;
-            const iframeSrc = link.dataset.iframeSrc;
-
-            if (videoSrc) {
-                iframePlayer.style.display = 'none';
-                iframePlayer.src = '';
-                videoPlayerContainer.style.display = 'block';
-                videoPlayer.src({ src: videoSrc, type: 'application/x-mpegURL' });
-                videoPlayer.play();
-                videoPlayerContainer.scrollIntoView({ behavior: 'smooth' });
-            } else if (iframeSrc) {
-                videoPlayer.pause();
-                videoPlayerContainer.style.display = 'none';
-                videoPlayer.src('');
-                iframePlayer.style.display = 'block';
-                iframePlayer.src = iframeSrc;
-                iframePlayer.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            programLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-        }
-
-        programLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                activateChannel(link);
-            });
-        });
-
-        document.addEventListener('keydown', (event) => {
-            const key = event.key;
-            if (key >= '1' && key <= '9') {
-                const index = parseInt(key, 10) - 1;
-                if (index < programLinks.length) {
-                    activateChannel(programLinks[index]);
-                }
-            } else if (key === '0') {
-                const index = 9;
-                if (index < programLinks.length) {
-                    activateChannel(programLinks[index]);
-                }
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@videojs/http-streaming@1.13.3/dist/videojs-http-streaming.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
